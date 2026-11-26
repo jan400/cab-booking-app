@@ -2,14 +2,13 @@
   <title id="title">Cab Booking API architecture</title>
   <desc id="description">HTTP clients call Spring REST controllers, which delegate to services, repositories, and a MySQL database.</desc>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0L10 5L0 10Z" fill="#718096"/>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L12 6L0 12Z" fill="#718096"/>
     </marker>
     <style>
       .title { font: 700 25px Arial, sans-serif; fill: #18304b; }
       .label { font: 700 18px Arial, sans-serif; fill: #18304b; }
       .detail { font: 14px Arial, sans-serif; fill: #4a5d70; }
-      .flow { font: 12px Arial, sans-serif; fill: #64748b; }
     </style>
   </defs>
   <rect width="1200" height="430" rx="12" fill="#f4f7fa"/>
@@ -17,16 +16,10 @@
   <text x="48" y="88" class="detail">A layered Spring Boot API backed by MySQL</text>
 
   <g fill="none" stroke="#718096" stroke-width="3" marker-end="url(#arrow)">
-    <path d="M230 220H264"/>
-    <path d="M458 220H492"/>
-    <path d="M686 220H720"/>
-    <path d="M914 220H948"/>
-  </g>
-  <g class="flow" text-anchor="middle">
-    <text x="247" y="202">JSON / HTTP</text>
-    <text x="475" y="202">domain calls</text>
-    <text x="703" y="202">JPA</text>
-    <text x="931" y="202">SQL</text>
+    <path d="M236 220H256"/>
+    <path d="M464 220H484"/>
+    <path d="M692 220H712"/>
+    <path d="M920 220H940"/>
   </g>
 
   <g>
