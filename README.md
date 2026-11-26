@@ -1,24 +1,32 @@
 <div align="center">
 
-# Cab Booking API
+# Cab Booking Platform
 
-**A RESTful backend for managing customers, drivers, and cab bookings.**
+**A full-stack cab operations app for booking trips and managing customers and drivers.**
 
 [![Java 17](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot 3.2.5](https://img.shields.io/badge/Spring%20Boot-3.2.5-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![React 18](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)](https://react.dev/)
+[![Vite 5](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![Maven](https://img.shields.io/badge/Maven-build-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-database-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![REST API](https://img.shields.io/badge/API-REST-005571?logo=fastapi&logoColor=white)](https://en.wikipedia.org/wiki/REST)
 [![Version](https://img.shields.io/badge/version-1.0.0-informational)](pom.xml)
 
 </div>
 
-Cab Booking API is a Spring Boot service for registering customers and drivers, matching bookings with available vehicles, calculating fares, and tracking booking and driver status. It uses Spring Web, Spring Data JPA, Bean Validation, and MySQL.
+Cab Booking Platform combines a React and Vite operations dashboard with a Spring Boot REST API. Book trips, manage customer and driver records, assign available vehicles, and follow booking status from one interface.
+
+## Product Preview
+
+![Cab Desk frontend dashboard showing trip management and the booking form](docs/images/cab-desk-dashboard.png)
+
+*Cab Desk Trips dashboard captured from the running frontend.*
 
 ## Contents
 
 - [Features](#features)
 - [Technology](#technology)
+- [Product Preview](#product-preview)
 - [Architecture](#architecture)
 - [Booking Lifecycle](#booking-lifecycle)
 - [Getting Started](#getting-started)
@@ -35,6 +43,7 @@ Cab Booking API is a Spring Boot service for registering customers and drivers, 
 
 - Create, list, retrieve, update, and delete customer records.
 - Manage driver profiles and filter drivers by availability.
+- Use the Cab Desk dashboard to view trips and manage bookings, drivers, and customers.
 - Assign an available driver matching a requested vehicle type.
 - Calculate fares from a base fare and per-kilometer vehicle rate.
 - Complete or cancel confirmed bookings and release the assigned driver.
@@ -45,6 +54,7 @@ Cab Booking API is a Spring Boot service for registering customers and drivers, 
 
 | Component | Technology |
 | --- | --- |
+| Frontend | React 18, Vite 5, JavaScript |
 | Language | Java 17 |
 | Application framework | Spring Boot 3.2.5 |
 | HTTP API | Spring Web (Spring MVC) |
@@ -69,6 +79,7 @@ Cab Booking API is a Spring Boot service for registering customers and drivers, 
 - JDK 17 or newer
 - Apache Maven 3.6.3 or newer
 - MySQL 8.0 or a compatible MySQL server
+- Node.js 18 or newer and npm
 - Git
 
 ### Clone the repository
@@ -82,7 +93,7 @@ cd cab-booking-app
 
 Start MySQL and provide credentials for a MySQL account that can create the `cab_booking` database and tables. The JDBC URL enables database creation if it does not already exist. Hibernate updates the schema at application startup.
 
-On PowerShell:
+Spring Boot reads the `DB_USERNAME` and `DB_PASSWORD` environment variables. It does **not** load `.env` files automatically. In PowerShell, set the values in the terminal where you will run the backend:
 
 ```powershell
 $env:DB_USERNAME = "root"
@@ -96,15 +107,27 @@ export DB_USERNAME=root
 export DB_PASSWORD=your-mysql-password
 ```
 
-The application currently defaults to `root` / `root` when these environment variables are not set. Override the defaults for local development; never use root credentials or commit secrets in a deployed environment.
+The application currently falls back to `root` / `root` when these variables are not set. Use credentials that match your local MySQL installation. Do not commit real credentials or use the fallback credentials in a deployed environment.
 
-### Run the application
+### Run the backend
 
 ```bash
 mvn spring-boot:run
 ```
 
-The API will be available at `http://localhost:8080`.
+The API will be available at `http://localhost:8080`. Keep this terminal running.
+
+### Install and run the frontend
+
+Open a second terminal from the repository root:
+
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173). The Vite development server proxies `/api` requests to the backend at `http://localhost:8080`, so start the backend first. The frontend can also be built with `npm run build` from `frontend/`.
 
 ### Import the Postman collection
 
@@ -254,6 +277,7 @@ The application follows a controller-service-repository structure: controllers h
 | `DB_USERNAME` | `root` | Database username |
 | `DB_PASSWORD` | `root` | Database password |
 | `spring.jpa.hibernate.ddl-auto` | `update` | Update the database schema on startup |
+| `VITE_API_URL` | Empty | Optional API base URL when hosting the frontend separately; configure backend CORS for that origin |
 
 Database settings are defined in [`src/main/resources/application.properties`](src/main/resources/application.properties). Environment variables can override the database username and password without editing the file.
 
