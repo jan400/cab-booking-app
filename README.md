@@ -19,6 +19,8 @@ Cab Booking API is a Spring Boot service for registering customers and drivers, 
 
 - [Features](#features)
 - [Technology](#technology)
+- [Architecture](#architecture)
+- [Booking Lifecycle](#booking-lifecycle)
 - [Getting Started](#getting-started)
 - [API Reference](#api-reference)
 - [Booking Rules](#booking-rules)
@@ -51,6 +53,14 @@ Cab Booking API is a Spring Boot service for registering customers and drivers, 
 | Validation | Jakarta Bean Validation |
 | Build | Apache Maven |
 | Tests | JUnit 5, Mockito, Spring Boot Test |
+
+## Architecture
+
+![Cab Booking API architecture](docs/images/architecture.svg)
+
+## Booking Lifecycle
+
+![Cab booking lifecycle](docs/images/booking-lifecycle.svg)
 
 ## Getting Started
 
